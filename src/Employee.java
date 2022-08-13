@@ -8,14 +8,15 @@ public class Employee {
     private int department;
     private double salary;
     private int id;
-    private static int count = 1;
+    public static int count = 0;
     public Employee(String lastName, String firstName, String mediumName, int department, double salary) {
         this.firstName = firstName;
         this.mediumName = mediumName;
         this.lastName = lastName;
         this.department = department;
         this.salary = salary;
-
+        count++;
+        id = count;
     }
 
     public String getFirstName() {
@@ -57,7 +58,7 @@ public class Employee {
     public String toString() {
         return "Сотрудники:\n" +
                 "ID = '" + id + '\'' +
-                "Фамилия ='" + lastName + '\'' +
+                " Фамилия ='" + lastName + '\'' +
                 ",Имя ='" + firstName + '\'' +
                 ",Отчество='" + mediumName + '\'' +
                 ",Отдел=" + department +
@@ -78,10 +79,9 @@ public class Employee {
         maxSum = Math.max(maxSum, salary);
         return  maxSum;
     }
-//    public static double mediumSalary(){
-//
-//    }
-//    public static String printEmployee(){
-//
-//    }
+    public double mediumSalary(){
+        double sum = 0;
+        sum = (salary + sum) / count;
+        return sum;
+    }
 }

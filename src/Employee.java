@@ -42,7 +42,6 @@ public class Employee {
     public double getSalary() {
         return salary;
     }
-
     public void setSalary(double salary) {
         this.salary = salary;
     }
@@ -63,25 +62,5 @@ public class Employee {
                 ",Отчество='" + mediumName + '\'' +
                 ",Отдел=" + department +
                 ",зарплата =" + salary;
-    }
-    public double sumSalary() {
-        double sum = 0;
-        sum = salary + sum;
-        return sum;
-    }
-    public double minSalaryEmployee(){
-        double minSum = Double.MAX_VALUE;;
-        minSum = Math.min(minSum, salary);
-        return  minSum;
-    }
-    public double maxSalaryEmployee(){
-        double maxSum = Double.MIN_VALUE;;
-        maxSum = Math.max(maxSum, salary);
-        return  maxSum;
-    }
-    public double mediumSalary(){
-        double sum = 0;
-        sum = (salary + sum) / count;
-        return sum;
     }
 }

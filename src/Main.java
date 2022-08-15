@@ -1,49 +1,58 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
+    public static Employee[] employee = new Employee[10];
+
     public static void main(String[] args) {
-        Employee[] employee = new Employee[10];
-        employee[0]= new Employee("Иванов", "Иван", "Иванович", 1, 52200);
-        employee[1]= new Employee("Иванов", "Петр", "Иванович", 2, 45600);
-        employee[2]= new Employee("Иванов", "Сергей", "Иванович", 3, 42350);
-        employee[3]= new Employee("Иванов", "Артем", "Иванович", 4, 35950);
-        employee[4]= new Employee("Иванов", "Роман", "Иванович", 5, 30500);
-        employee[5]= new Employee("Иванов", "Данил", "Иванович", 1, 65420);
-        employee[6]= new Employee("Иванов", "Василий", "Иванович", 2, 112300);
-        employee[7]= new Employee("Иванов", "Антон", "Иванович", 3, 47850);
-        employee[8]= new Employee("Иванов", "Федор", "Иванович", 4, 39500);
-        employee[9]= new Employee("Иванов", "Алексадн", "Иванович", 5, 48500);
-
+        Random random = new Random();
+        var names = new String[]{"Иван", "Петр", "Сергей", "Артем", "Роман", "Данил", "Василий", "Антон", "Федор", "Алексаднр"};
+        var surNames = new String[]{"Иванов", "Петров", "Сидоров", "Пшенов", "Хомяков"};
+        var middleNames = new String[]{"Иванович", "Петрович", "Александрович"};
+        for (int i = 0; i < employee.length; i++) {
+            var salary = random.nextInt(100_000)+10000;
+            var department = random.nextInt(5)+1;
+            var name = names[random.nextInt(names.length)];
+            var surName = surNames[random.nextInt(surNames.length)];
+            var middleName = middleNames[random.nextInt(middleNames.length)];
+            employee[i] = new Employee(name, surName, middleName, department, salary);
+        }
         System.out.println("Список всех сотрудников: ");
-        for (int i = 0; i<employee.length;i++){
-            System.out.println(employee[i].toString());
-        }
-        System.out.println();
+        printAllEmployees();
+        System.out.println("Общая сумма затрат на зарплату: " + sumSalary() + "\n");
+        System.out.println("Минимальная заработная плата: " + minSalaryEmployee() + "\n");
+        System.out.println("Максимальная заработная плата: " + maxSalaryEmployee() + "\n");
+        System.out.println("Средняя заработная плата: " + mediumSalary());
+    }
+    public static double sumSalary() {
         double sum = 0;
+        for (int i = 0; i < employee.length; i++)
+        {
+            sum = employee[i].getSalary() + sum;
+        }
+        return sum;
+    }
+    public static double minSalaryEmployee () {
+        double minSum = Double.MAX_VALUE;
         for (int i = 0; i < employee.length;i++){
-            sum = employee[i].sumSalary() + sum;
+            minSum = Math.min(minSum, employee[i].getSalary());
         }
-        System.out.println("Общая сумма затрат на зарплату: " + sum + "\n");
-
-        double minSum = 0;
+        return minSum;
+    }
+    public static double maxSalaryEmployee () {
+        double maxSum = Double.MIN_VALUE;
         for (int i = 0; i < employee.length;i++){
-            minSum = employee[i].minSalaryEmployee();
+            maxSum = Math.max(maxSum, employee[i].getSalary());
         }
-        System.out.println("Минимальная заработная плата: " + minSum + "\n");
-
-        double maxSum = 0;
-        for (int i = 0; i < employee.length;i++){
-            if (maxSum < employee[i].maxSalaryEmployee()){
-                maxSum = employee[i].maxSalaryEmployee();
-            }
+        return maxSum;
+    }
+    public static double mediumSalary () {
+        return sumSalary() / employee.length;
+    }
+    public static void printAllEmployees () {
+        for (var employees : employee) {
+            System.out.println(employees);
         }
-        System.out.println("Максимальная заработная плата: " + maxSum + "\n");
-
-        double mediumSum = 0;
-        for (int i = 0; i<employee.length;i++){
-            mediumSum = employee[i].mediumSalary() + mediumSum;
-        }
-        System.out.println("Средняя заработная плата: " + mediumSum);
     }
 }
